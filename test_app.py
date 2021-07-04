@@ -23,7 +23,9 @@ def test_pred_virginica():
         response = client.post("/predict_flower", json=payload)
         # asserting the correct response is received
         assert response.status_code == 200
-        assert response.json() == {"flower_class": "Iris Virginica"}
+        assert "flower_class" in response.json()
+        assert "Iris Virginica" in response.json().get("flower_class")
+        assert "timestamp" in response.json()
 
 # test to check if Iris Versicolour is classified correctly
 def test_pred_versicolour():
@@ -38,7 +40,9 @@ def test_pred_versicolour():
         response = client.post("/predict_flower", json=payload)
         # asserting the correct response is received
         assert response.status_code == 200
-        assert response.json() == {"flower_class": "Iris Versicolour"}
+        assert "flower_class" in response.json()
+        assert "Iris Versicolour" in response.json().get("flower_class")
+        assert "timestamp" in response.json()
 
 # test to check the correct functioning of feedback_loop
 def test_feedback_loop():
